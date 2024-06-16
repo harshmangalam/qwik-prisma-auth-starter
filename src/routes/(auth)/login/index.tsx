@@ -6,67 +6,64 @@ import { Input } from "~/components/ui/input/input";
 import { Label } from "~/components/ui/label/label";
 import { FooterCard } from "../footer-card";
 import { prisma } from "~/util/prisma";
-import { hashPassord } from "~/util/password";
+import { comparePassword } from "~/util/password";
 import { Alert } from "~/components/ui/alert/alert";
-export const useSignup = routeAction$(
-  async ({ email, password, name }, { fail, redirect, error }) => {
+export const useLogin = routeAction$(
+  async ({ email, password }, { fail, redirect, error }) => {
     try {
-      await prisma.user.create({
-        data: {
-          name,
+      const user = await prisma.user.findUnique({
+        where: {
           email,
-          password: await hashPassord(password),
         },
       });
-      throw redirect(302, "/login");
-    } catch (err: any) {
-      if (err.code === "P2002") {
-        return fail(409, {
-          error: "Email address is already in use",
+
+      if (user?.email !== email) {
+        return fail(400, {
+          error: "Invalid credentials",
         });
       }
-      throw error(500, "Internal Server Error");
+      const matchPassword = await comparePassword(password, user.password);
+
+      if (!matchPassword) {
+        return fail(400, {
+          error: "Invalid credentials",
+        });
+      }
+
+      throw redirect(302, "/");
+    } catch (err: any) {
+      if (err.message) {
+        console.log(err);
+        throw error(500, "Internal server error");
+      }
+      throw err;
     }
   },
   zod$({
-    name: z.string().min(1),
     email: z.string().email(),
-    password: z.string().min(6),
+    password: z.string(),
   }),
 );
 export default component$(() => {
-  const signup = useSignup();
+  const login = useLogin();
   return (
     <div class="flex w-full max-w-sm flex-col gap-2">
-      <Card.Root class="w-full max-w-sm">
+      <Card.Root class="w-full max-w-md">
         <Card.Header class="text-center">
-          <Card.Title class="text-2xl">Sign Up</Card.Title>
-          <Card.Description class="text-lg leading-6">
-            Sign up to create new account and connect with peoples.
-          </Card.Description>
+          <Card.Title class="text-2xl">Log in</Card.Title>
         </Card.Header>
         <Card.Content>
-          {signup.value?.error && (
+          {login.value?.error && (
             <Alert.Root look={"alert"}>
               <Alert.Title>Error</Alert.Title>
-              <Alert.Description>{signup.value.error}</Alert.Description>
+              <Alert.Description>{login.value.error}</Alert.Description>
             </Alert.Root>
           )}
-          <Form action={signup} class="mt-4 flex flex-col gap-4">
-            <div class="grid items-center gap-1.5">
-              <Label for="name">Name</Label>
-              <Input
-                error={signup.value?.fieldErrors?.name?.[0]}
-                type="name"
-                id="name"
-                name="name"
-                placeholder="Name"
-              />
-            </div>
+          <Form action={login} class="mt-4 flex flex-col gap-4">
             <div class="grid items-center gap-1.5">
               <Label for="email">Email</Label>
               <Input
-                error={signup.value?.fieldErrors?.email?.[0]}
+                error={login.value?.fieldErrors?.email?.[0]}
                 type="email"
                 id="email"
                 name="email"
@@ -76,23 +73,23 @@ export default component$(() => {
             <div class="grid items-center gap-1.5">
               <Label for="password">Password</Label>
               <Input
-                error={signup.value?.fieldErrors?.password?.[0]}
+                error={login.value?.fieldErrors?.password?.[0]}
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Password"
               />
             </div>
-            <Button disabled={signup.isRunning} class="w-full">
-              Sign up
+            <Button disabled={login.isRunning} class="w-full">
+              Log in
             </Button>
           </Form>
         </Card.Content>
       </Card.Root>
       <FooterCard>
-        Have an account?{" "}
+        Don't have an account?{" "}
         <Link href="/login" class="font-semibold text-primary">
-          Login
+          Sign up
         </Link>
       </FooterCard>
     </div>
