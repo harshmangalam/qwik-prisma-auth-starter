@@ -2,11 +2,16 @@
   "version": "6.0",
   "nxVersion": "19.3.0",
   "deps": {
+    "@prisma/client": "5.15.0",
+    "bcrypt": "^5.1.1",
+    "class-variance-authority": "^0.7.0",
     "@builder.io/qwik": "^1.5.7",
     "@builder.io/qwik-city": "^1.5.7",
     "@qwik-ui/headless": "^0.4.4",
     "@qwik-ui/styled": "^0.1.0",
     "@qwik-ui/utils": "^0.2.1",
+    "@qwikest/icons": "^0.0.13",
+    "@types/bcrypt": "^5.0.2",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
@@ -18,8 +23,10 @@
     "postcss": "^8.4.31",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.4",
+    "prisma": "^5.15.0",
     "qwik-ui": "^0.1.0",
     "tailwindcss": "3.3.3",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "5.4.5",
     "undici": "*",
     "vite": "^5.2.10",
@@ -44,7 +51,7 @@
         },
         {
           "file": ".gitignore",
-          "hash": "2886366316958850132"
+          "hash": "16301763661127079426"
         },
         {
           "file": ".prettierignore",
@@ -72,13 +79,15 @@
         },
         {
           "file": "package.json",
-          "hash": "15208904178146866270",
+          "hash": "11128213222043895522",
           "deps": [
             "npm:@builder.io/qwik",
             "npm:@builder.io/qwik-city",
             "npm:@qwik-ui/headless",
             "npm:@qwik-ui/styled",
             "npm:@qwik-ui/utils",
+            "npm:@qwikest/icons",
+            "npm:@types/bcrypt",
             "npm:@types/eslint",
             "npm:@types/node",
             "npm:@typescript-eslint/eslint-plugin",
@@ -90,21 +99,30 @@
             "npm:postcss",
             "npm:prettier",
             "npm:prettier-plugin-tailwindcss",
+            "npm:prisma",
             "npm:qwik-ui",
             "npm:tailwindcss",
+            "npm:tailwindcss-animate",
             "npm:typescript",
             "npm:undici",
             "npm:vite",
-            "npm:vite-tsconfig-paths"
+            "npm:vite-tsconfig-paths",
+            "npm:@prisma/client",
+            "npm:bcrypt",
+            "npm:class-variance-authority"
           ]
         },
         {
           "file": "pnpm-lock.yaml",
-          "hash": "509575924974361908"
+          "hash": "11210001394223159716"
         },
         {
           "file": "postcss.config.cjs",
           "hash": "1579725330904862112"
+        },
+        {
+          "file": "prisma/schema.prisma",
+          "hash": "7162186899594963674"
         },
         {
           "file": "public/favicon.svg",
@@ -125,6 +143,14 @@
         {
           "file": "qwik.env.d.ts",
           "hash": "1792037603741036108"
+        },
+        {
+          "file": "src/components/footer/index.tsx",
+          "hash": "10546347547127658684"
+        },
+        {
+          "file": "src/components/footer/link-item.tsx",
+          "hash": "13382470739583267170"
         },
         {
           "file": "src/components/router-head/router-head.tsx",
@@ -148,11 +174,19 @@
         },
         {
           "file": "src/components/ui/input/input.tsx",
-          "hash": "17041518140864978722"
+          "hash": "5248844582827909674"
         },
         {
           "file": "src/components/ui/label/label.tsx",
           "hash": "1834835142959414884"
+        },
+        {
+          "file": "src/components/ui/separator/separator.tsx",
+          "hash": "1786671082757971171"
+        },
+        {
+          "file": "src/config/constatnt.ts",
+          "hash": "12872811322374146577"
         },
         {
           "file": "src/entry.dev.tsx",
@@ -175,6 +209,18 @@
           "hash": "18239945099443866912"
         },
         {
+          "file": "src/routes/(auth)/footer-card.tsx",
+          "hash": "1311743467413017439"
+        },
+        {
+          "file": "src/routes/(auth)/layout.tsx",
+          "hash": "4707985081242975478"
+        },
+        {
+          "file": "src/routes/(auth)/signup/index.tsx",
+          "hash": "7688624545586825944"
+        },
+        {
           "file": "src/routes/index.tsx",
           "hash": "9611889894005730386"
         },
@@ -187,12 +233,20 @@
           "hash": "7756631822665481529"
         },
         {
+          "file": "src/util/password.ts",
+          "hash": "13478037200713412833"
+        },
+        {
+          "file": "src/util/prisma.ts",
+          "hash": "13123273128779560003"
+        },
+        {
           "file": "tailwind.config.js",
           "hash": "18340035634599436185"
         },
         {
           "file": "tsconfig.json",
-          "hash": "6896372378635884482"
+          "hash": "7045600783084040305"
         },
         {
           "file": "vite.config.ts",
