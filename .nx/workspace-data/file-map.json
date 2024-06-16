@@ -135,6 +135,10 @@
           "hash": "1294416892940537747"
         },
         {
+          "file": "src/components/ui/badge/badge.tsx",
+          "hash": "14494939795121147094"
+        },
+        {
           "file": "src/components/ui/input/input.tsx",
           "hash": "17041518140864978722"
         },
