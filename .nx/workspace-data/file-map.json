@@ -151,6 +151,10 @@
           "hash": "17041518140864978722"
         },
         {
+          "file": "src/components/ui/label/label.tsx",
+          "hash": "1834835142959414884"
+        },
+        {
           "file": "src/entry.dev.tsx",
           "hash": "15859778472158270085"
         },
