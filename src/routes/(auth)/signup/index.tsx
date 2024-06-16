@@ -8,7 +8,6 @@ import { FooterCard } from "../footer-card";
 import { prisma } from "~/util/prisma";
 import { hashPassord } from "~/util/password";
 import { Alert } from "~/components/ui/alert/alert";
-import { HiExclamationCircleOutline } from "@qwikest/icons/heroicons";
 export const useSignup = routeAction$(
   async ({ email, password, name }, { fail, redirect, error }) => {
     try {
@@ -49,7 +48,6 @@ export default component$(() => {
         <Card.Content>
           {signup.value?.error && (
             <Alert.Root look={"alert"}>
-              <HiExclamationCircleOutline class="h-6 w-6" />
               <Alert.Title>Error</Alert.Title>
               <Alert.Description>{signup.value.error}</Alert.Description>
             </Alert.Root>
