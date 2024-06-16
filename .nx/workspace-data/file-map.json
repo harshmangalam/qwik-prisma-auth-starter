@@ -143,6 +143,10 @@
           "hash": "3331476381730401701"
         },
         {
+          "file": "src/components/ui/card/card.tsx",
+          "hash": "7275048784630296511"
+        },
+        {
           "file": "src/components/ui/input/input.tsx",
           "hash": "17041518140864978722"
         },
