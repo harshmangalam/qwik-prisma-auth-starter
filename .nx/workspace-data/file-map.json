@@ -131,6 +131,10 @@
           "hash": "13869225469366272939"
         },
         {
+          "file": "src/components/ui/avatar/avatar.tsx",
+          "hash": "1294416892940537747"
+        },
+        {
           "file": "src/components/ui/input/input.tsx",
           "hash": "17041518140864978722"
         },
