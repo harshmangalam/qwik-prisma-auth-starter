@@ -5,8 +5,7 @@ async function createJwt(userId: string, JWT_SECRET: string) {
   return new jose.SignJWT({
     sub: userId,
   })
-    .setProtectedHeader({ alg: "RS256" })
-    .setIssuedAt()
+    .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(JWT_EXP_TIME)
     .sign(new TextEncoder().encode(JWT_SECRET));
 }

@@ -8,8 +8,9 @@ import { FooterCard } from "../footer-card";
 import { prisma } from "~/util/prisma";
 import { comparePassword } from "~/util/password";
 import { Alert } from "~/components/ui/alert/alert";
+import { createJwt } from "~/util/jwt";
 export const useLogin = routeAction$(
-  async ({ email, password }, { fail, redirect, error }) => {
+  async ({ email, password }, { fail, redirect, error, env, cookie }) => {
     try {
       const user = await prisma.user.findUnique({
         where: {
@@ -29,6 +30,13 @@ export const useLogin = routeAction$(
           error: "Invalid credentials",
         });
       }
+
+      const jwt = await createJwt(user.id, env.get("JWT_SECRET")!);
+      cookie.set("accessToken", jwt, {
+        maxAge: [1, "hours"],
+        path: "/",
+        httpOnly: true,
+      });
 
       throw redirect(302, "/");
     } catch (err: any) {
