@@ -88,7 +88,7 @@ export default component$(() => {
       </Card.Root>
       <FooterCard>
         Don't have an account?{" "}
-        <Link href="/login" class="font-semibold text-primary">
+        <Link href="/signup" class="font-semibold text-primary">
           Sign up
         </Link>
       </FooterCard>
