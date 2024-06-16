@@ -144,7 +144,7 @@
         },
         {
           "file": "src/global.css",
-          "hash": "2885799375830454325"
+          "hash": "14221340038390401754"
         },
         {
           "file": "src/root.tsx",
@@ -164,7 +164,7 @@
         },
         {
           "file": "tailwind.config.js",
-          "hash": "2698005983013824542"
+          "hash": "18340035634599436185"
         },
         {
           "file": "tsconfig.json",
