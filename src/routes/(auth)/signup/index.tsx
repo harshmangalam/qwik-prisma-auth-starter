@@ -10,24 +10,23 @@ import { hashPassord } from "~/util/password";
 import { Alert } from "~/components/ui/alert/alert";
 import { HiExclamationCircleOutline } from "@qwikest/icons/heroicons";
 export const useSignup = routeAction$(
-  async ({ email, password, name }, { fail }) => {
+  async ({ email, password, name }, { fail, redirect, error }) => {
     try {
-      const user = await prisma.user.create({
+      await prisma.user.create({
         data: {
           name,
           email,
           password: await hashPassord(password),
         },
       });
-      return;
-    } catch (error: any) {
-      if (error.code === "P2002") {
+      throw redirect(302, "/login");
+    } catch (err: any) {
+      if (err.code === "P2002") {
         return fail(409, {
           error: "Email address is already in use",
         });
       }
-      console.log(error);
-      return error;
+      throw error(500, "Internal Server Error");
     }
   },
   zod$({
@@ -59,7 +58,7 @@ export default component$(() => {
             <div class="grid items-center gap-1.5">
               <Label for="name">Name</Label>
               <Input
-                error={signup.value?.fieldErrors?.name}
+                error={signup.value?.fieldErrors?.name?.[0]}
                 type="name"
                 id="name"
                 name="name"
@@ -69,7 +68,7 @@ export default component$(() => {
             <div class="grid items-center gap-1.5">
               <Label for="email">Email</Label>
               <Input
-                error={signup.value?.fieldErrors?.email}
+                error={signup.value?.fieldErrors?.email?.[0]}
                 type="email"
                 id="email"
                 name="email"
@@ -79,7 +78,7 @@ export default component$(() => {
             <div class="grid items-center gap-1.5">
               <Label for="password">Password</Label>
               <Input
-                error={signup.value?.fieldErrors?.password}
+                error={signup.value?.fieldErrors?.password?.[0]}
                 type="password"
                 id="password"
                 name="password"
