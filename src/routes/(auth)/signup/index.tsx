@@ -7,7 +7,8 @@ import { Label } from "~/components/ui/label/label";
 import { FooterCard } from "../footer-card";
 import { prisma } from "~/util/prisma";
 import { hashPassord } from "~/util/password";
-
+import { Alert } from "~/components/ui/alert/alert";
+import { HiExclamationCircleOutline } from "@qwikest/icons/heroicons";
 export const useSignup = routeAction$(
   async ({ email, password, name }, { fail }) => {
     try {
@@ -47,7 +48,14 @@ export default component$(() => {
           </Card.Description>
         </Card.Header>
         <Card.Content>
-          <Form action={signup} class="flex flex-col gap-4">
+          {signup.value?.error && (
+            <Alert.Root look={"alert"}>
+              <HiExclamationCircleOutline class="h-6 w-6" />
+              <Alert.Title>Error</Alert.Title>
+              <Alert.Description>{signup.value.error}</Alert.Description>
+            </Alert.Root>
+          )}
+          <Form action={signup} class="mt-4 flex flex-col gap-4">
             <div class="grid items-center gap-1.5">
               <Label for="name">Name</Label>
               <Input

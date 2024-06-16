@@ -7,7 +7,10 @@ export const LinkItem = component$(({ href }: { href: string }) => {
   return (
     <li>
       <Link
-        class={cn(buttonVariants({ look: "link" }), "text-sm opacity-60")}
+        class={cn(
+          buttonVariants({ look: "link" }),
+          "m-0 h-0 p-0 text-xs opacity-60",
+        )}
         href={href}
       >
         <Slot />
